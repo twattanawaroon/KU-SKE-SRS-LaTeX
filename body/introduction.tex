@@ -4,80 +4,103 @@
 \section{Background}
 \label{section:background}
 
-<TIP: 
-A background chapter in a book serves the purpose of providing essential context, information, or history that is relevant
-to the overall understanding of the book's subject matter. This chapter typically appears early in the book and aims to set the
-stage for the reader by offering background details that are crucial for comprehending the main narrative.
-/>
+Meetings are an indispensable tool for collaborative work in both academic and professional settings.
+In theory, a focused meeting covering a single topic should require no more than 15--30 minutes.
+In practice, however, teams routinely turn short discussions into multi-hour sessions.
+The root cause is \textit{topic drift}: the gradual, often unnoticed, departure of conversation from the
+original agenda.
+ 
+The development team behind MeetRX experienced this problem first-hand during group project work.
+What should have been a concise weekly sync repeatedly stretched into a three-hour session because
+members lost track of the intended focus and the conversation wandered across unrelated topics.
+This observation motivated the creation of an intelligent meeting assistant that can detect drift as it
+occurs and help teams stay aligned.
 
 \section{Problem Statement}
 \label{section:problem-statement}
 
-<TIP: 
-A problem statement refers to a clear central issue,
-challenge, or question that the project aims to address or explore. It is a
-declaration that highlights the specific problem the author intends to examine,
-discuss, or solve throughout the course of the project.
-/>
+The following problems were identified through the team's own experience and stakeholder interviews:
+ 
+\begin{enumerate}
+    \item \textbf{Burden on the minute-taker.} During meetings, the person responsible for taking notes
+    cannot participate meaningfully in the discussion. Their attention is divided between listening,
+    comprehending, and writing, which reduces both the quality of the notes and their contribution to
+    the meeting.
+ 
+    \item \textbf{Standup meetings overrunning their allotted time.} Daily standups and progress-update
+    meetings are intended to be short, time-boxed events. In practice, they frequently exceed their
+    scheduled duration because participants introduce tangential topics, triggering lengthy discussions
+    that should be handled separately.
+ 
+    \item \textbf{Repeated debates caused by poor institutional memory.} In long-term projects with
+    frequent meetings, teams often forget what was discussed or decided in earlier sessions. As a result,
+    the same topics are re-opened and the same decisions are re-debated, consuming time that could be
+    spent on new work.
+\end{enumerate}
 
 \section{Solution Overview}
 \label{section:solution-overview}
 
-<TIP: 
-A software solution overview provides a high-level and
-concise description of a software product or system. It serves as an
-introduction to the software, offering a glimpse into its key features,
-functionalities, and the problems it aims to address. This overview is often
-presented in documentation, marketing materials, or other communication
-channels to give stakeholders, potential users, or decision-makers a quick
-understanding of what the software does and why it is valuable.
-/>
+MeetRX addresses the problems above through three integrated AI subsystems:
+ 
+\begin{enumerate}
+    \item \textbf{Summarisation AI}: Automatically transcribes meeting audio using OpenAI Whisper
+    and generates a structured summary so that no human minute-taker is required. All participants can
+    engage fully in the discussion.
+ 
+    \item \textbf{Topic Drift Detection AI (Main Feature)}: Continuously analyses the live conversation
+    using natural language processing techniques to assign a drift score to recent utterances. When the
+    score exceeds a configurable threshold, a large language model re-evaluation is triggered and a
+    real-time alert is surfaced to meeting participants, prompting them to return to the agenda.
+ 
+    \item \textbf{Agentic AI}: Provides a conversational interface that can answer questions about past
+    meetings, look up decisions recorded in previous summaries, query the project codebase, and integrate
+    with external tools to retrieve relevant context on demand.
+\end{enumerate}
 
 \subsection{Features}
 \label{subsection:features}
 
 \begin{enumerate}[leftmargin=80pt]
-    \item Feature Name: Short Description of Feature
-    \item Feature Name: Short Description of Feature
+    \item \textbf{Real-time Topic Drift Detection}: Monitors conversation flow and raises an alert when
+    discussion deviates from the stated agenda topic.
+    \item \textbf{Automatic Meeting Summarisation}: Produces a concise, structured summary at the end of
+    every session without requiring manual note-taking.
+    \item \textbf{Q\&A Chatbot}: Allows participants to query past meeting summaries and project context
+    using natural language.
+    \item \textbf{Task Assignment}: Extracts and records action items from meeting transcripts and assigns
+    them to the appropriate team members.
 \end{enumerate}
 
 \section{Target User}
 \label{section:target-user}
 
-<TIP: 
-The target user in a software project refers to the specific
-group or demographic of individuals for whom the software is designed and
-developed. Identifying the target user is a crucial step in the software
-development process as it helps the development team tailor the software to
-meet the needs, preferences, and requirements of that particular user group.
-Understanding the characteristics, behaviors, and expectations of the target
-users is essential for creating a user-friendly and effective software solution.
-
-Here are some key aspects related to defining the target user in a software project:
-
-Demographics: This includes factors such as age, gender,
-occupation, education level, and other demographic characteristics. Different
-age groups or professional backgrounds may have distinct preferences and
-requirements when it comes to software usability.
-
-Skill Level: Consideration of the users' technical proficiency and
-familiarity with similar software or technology. The level of technical expertise
-can influence the complexity of the user interface, the need for tutorials or
-documentation, and other user support features.
-
-Industry or Domain: For software solutions designed for specific
-industries or domains, understanding the unique challenges, workflows, and
-terminology within that industry is crucial. Tailoring the software to meet
-industry-specific needs is often necessary.
-/>
-
+MeetRX is designed for three primary user groups:
+ 
+\begin{itemize}
+    \item \textbf{Students}: Particularly those conducting group project meetings who need help keeping
+    discussions on-topic and producing reliable records of decisions made.
+    \item \textbf{Software Developers}: Engineering teams running daily standups, sprint planning, and
+    retrospectives who want shorter, more focused meetings and automatic summaries.
+    \item \textbf{Scrum Masters}: Facilitators responsible for sprint ceremonies who need tooling to
+    enforce time-boxes and surface relevant historical context during discussions.
+\end{itemize}
+ 
 \section{Terminology}
 \label{section:terminology}
 
-<TIP: 
-Terminology refers to the specific language, jargon, or
-specialized vocabulary used to describe concepts, ideas, or subjects within a
-particular field or domain. The use of terminology is often essential for clarity
-and precision, especially in books that cover technical, scientific, academic, or
-specialized topics.
-/>
+\begin{description}
+    \item[Topic Drift] A situation in which the ongoing conversation is no longer contributing to the
+    intended meeting topic or agenda item.
+    \item[Drift Score] A numerical value computed by the NLP pipeline that quantifies how far the current
+    utterance has deviated from the baseline topic embedding.
+    \item[Agenda] A predefined list of topics that a meeting is intended to cover.
+    \item[Utterance] A single spoken turn or message produced by one participant during a meeting.
+    \item[Summarisation] The process of condensing a meeting transcript into a shorter document that
+    captures the key points, decisions, and action items.
+    \item[Agentic AI] An AI system capable of autonomously invoking external tools or data sources to
+    answer queries without explicit step-by-step instructions from the user.
+    \item[LLM] Large Language Model; a neural network trained on large text corpora capable of generating
+    and understanding natural language.
+    \item[Whisper] An open-source automatic speech recognition model developed by OpenAI.
+\end{description}
