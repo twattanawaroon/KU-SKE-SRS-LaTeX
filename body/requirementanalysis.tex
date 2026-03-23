@@ -3,20 +3,18 @@
 
 \section{Stakeholder Analysis}
 \label{section:stakeholder-analysis}
+
 \begin{description}
     \item[Students] University students working in group projects need a tool that detects when their
     meeting drifts off the project agenda and automatically generates meeting minutes so that all
     members can participate in the discussion rather than taking turns as note-taker.
- 
     \item[Software Developers (Office Workers)] Software engineers attending daily standups and sprint
     ceremonies benefit from automatic meeting summaries and from an agent that can surface relevant
     decisions from past sessions, reducing repeated debate.
- 
     \item[Scrum Masters / Project Managers] Facilitators need visibility into whether a meeting is
     staying on-topic and access to a historical record of decisions so they can run tighter, more
     accountable ceremonies.
 \end{description}
-
 
 \section{User Stories and Use Cases}
 \label{section:user-stories-use-cases}
@@ -25,15 +23,15 @@
 
 \begin{enumerate}[leftmargin=80pt]
     \item As a \textbf{student}, I want the system to alert me when my group's conversation goes off-topic, so that we can finish our meeting within the scheduled time.
-
     \item As a \textbf{student}, I want an automatic summary of each meeting, so that I do not have to assign a dedicated note-taker.
-
     \item As a \textbf{student}, I want to query what was decided in a previous meeting, so that I
     do not have to re-read full transcripts.
 \end{enumerate}
- 
+
 \subsection{Software Developer}
-\begin{enumerate}[leftmargin=80pt, itemsep=0.75em, parsep=0pt]
+\label{subsection:software-developer-user-stories}
+
+\begin{enumerate}[leftmargin=80pt]
     \item As a \textbf{software developer}, I want standup meetings to stay focused on project
     progress, so that they finish within 15 minutes.
     \item As a \textbf{software developer}, I want action items extracted automatically from the
@@ -41,89 +39,93 @@
     \item As a \textbf{software developer}, I want to ask the AI agent about a past architectural
     decision, so that I do not have to search through old chat logs or documents.
 \end{enumerate}
- 
-\vspace{-5em}
 
 \subsection{Scrum Master}
-\begin{enumerate}[leftmargin=80pt, itemsep=0.75em, parsep=0pt]
+\label{subsection:scrum-master-user-stories}
+
+\begin{enumerate}[leftmargin=80pt]
     \item As a \textbf{scrum master}, I want a real-time indicator that shows whether the current
     discussion is on-topic, so that I can redirect the team without interrupting the conversation flow.
     \item As a \textbf{scrum master}, I want all sprint summaries stored and indexed, so that
     I can reference them during retrospectives.
 \end{enumerate}
 
+\pagebreak
 
 \section{Use Case Diagrams}
 \label{section:use-case-diagrams}
-<TIP: Include a UML Use Case Diagram that shows all actors and
-their relationships to the use cases you described.
-Also provide the written description for each use case. />
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{requirementanalysis/use-case-diagram.png}
+    \caption{Use Case Diagram}
+\end{figure}
 
 \section{Use Case Model}
 \label{section:use-case-model}
 \subsection*{UC-01: Start Meeting}
+
 \begin{tabular}{|l|p{10cm}|}
-\hline
-\textbf{Actor} & Meeting Participant \\
-\hline
-\textbf{Precondition} & The participant is authenticated and has a meeting agenda prepared. \\
-\hline
-\textbf{Main Flow} & 1. Participant opens the MeetRX dashboard. \newline
-                     2. Participant clicks ``Start Meeting'' and enters agenda topics. \newline
-                     3. System begins audio capture and topic embedding initialisation. \newline
-                     4. Meeting session is created and all participants are notified. \\
-\hline
-\textbf{Postcondition} & An active meeting session exists with an initialised topic baseline. \\
-\hline
+    \hline
+    \textbf{Actor} & Meeting Participant \\
+    \hline
+    \textbf{Precondition} & The participant is authenticated and has a meeting agenda prepared. \\
+    \hline
+    \textbf{Main Flow} & 1. Participant opens the MeetRX dashboard. \newline
+                        2. Participant clicks ``Start Meeting'' and enters agenda topics. \newline
+                        3. System begins audio capture and topic embedding initialisation. \newline
+                        4. Meeting session is created and all participants are notified. \\
+    \hline
+    \textbf{Postcondition} & An active meeting session exists with an initialised topic baseline. \\
+    \hline
 \end{tabular}
  
 \vspace{1em}
  
 \subsection*{UC-02: Receive Topic Drift Alert}
+
 \begin{tabular}{|l|p{10cm}|}
-\hline
-\textbf{Actor} & Meeting Participant (all) \\
-\hline
-\textbf{Precondition} & A meeting session is active. \\
-\hline
-\textbf{Main Flow} & 1. NLP module computes drift score for each utterance. \newline
-                     2. If score exceeds threshold, LLM re-evaluation is triggered. \newline
-                     3. System displays a drift alert banner visible to all participants. \newline
-                     4. Participant acknowledges the alert and guides conversation back to agenda. \\
-\hline
-\textbf{Alternative Flow} & If the participant dismisses the alert, the system logs the dismissal
-                            and resumes monitoring. \\
-\hline
-\textbf{Postcondition} & Alert is logged; meeting continues. \\
+    \hline
+    \textbf{Actor} & Meeting Participant (all) \\
+    \hline
+    \textbf{Precondition} & A meeting session is active. \\
+    \hline
+    \textbf{Main Flow} & 1. NLP module computes drift score for each utterance. \newline
+                        2. If score exceeds threshold, LLM re-evaluation is triggered. \newline
+                        3. System displays a drift alert banner visible to all participants. \newline
+                        4. Participant acknowledges the alert and guides conversation back to agenda. \\
+    \hline
+    \textbf{Alternative Flow} & If the participant dismisses the alert, the system logs the dismissal
+                                and resumes monitoring. \\
+    \hline
+    \textbf{Postcondition} & Alert is logged; meeting continues. \\
 \hline
 \end{tabular}
  
 \vspace{1em}
  
 \subsection*{UC-03: Query Past Meetings}
+
 \begin{tabular}{|l|p{10cm}|}
-\hline
-\textbf{Actor} & Meeting Participant \\
-\hline
-\textbf{Precondition} & At least one completed meeting summary exists in the system. \\
-\hline
-\textbf{Main Flow} & 1. Participant opens the Q\&A interface. \newline
-                     2. Participant types a natural language question. \newline
-                     3. Agentic AI retrieves relevant summaries and generates an answer. \newline
-                     4. System displays the answer with source meeting references. \\
-\hline
-\textbf{Postcondition} & Participant receives an answer grounded in historical meeting data. \\
-\hline
+    \hline
+    \textbf{Actor} & Meeting Participant \\
+    \hline
+    \textbf{Precondition} & At least one completed meeting summary exists in the system. \\
+    \hline
+    \textbf{Main Flow} & 1. Participant opens the Q\&A interface. \newline
+                        2. Participant types a natural language question. \newline
+                        3. Agentic AI retrieves relevant summaries and generates an answer. \newline
+                        4. System displays the answer with source meeting references. \\
+    \hline
+    \textbf{Postcondition} & Participant receives an answer grounded in historical meeting data. \\
+    \hline
 \end{tabular}
 
 \section{User Interface Design}
 \label{section:user-interface-design}
-<TIP: Put the initial design of your application here. You can
-showcase a detailed design of a specific page or a sitemap of your application.
-See an example below./>
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{examples/user-interface-design.png}
-    \caption{User Interface Design}
+    \includegraphics[width=0.8\textwidth]{requirementanalysis/rough-ui-wireframe-design.png}
+    \caption{User Interface Wireframe Design}
 \end{figure}
