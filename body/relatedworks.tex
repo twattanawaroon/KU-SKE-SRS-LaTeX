@@ -8,18 +8,24 @@
 
 \textbf{Standalone ANPR Systems} from vendors such as Genetec and Hikvision are mature commercial products designed for vehicle identification, including toll collection, parking, and stolen-vehicle detection. They do not perform helmet detection and are not designed for motorcycle-specific workflows.
 
-\textbf{Academic research} has demonstrated that AI can detect helmet violations in traffic footage, but these systems were built solely as experiments to test the concept. Most only focus on detecting the helmet and do not include license plate recognition, violation logging, or any real-world deployment on actual roads.
-
 \textbf{HelmTrack} addresses the gap left by all three categories by combining real-time helmet detection and license plate recognition into a single automated pipeline, eliminating the need for manual review while producing structured, evidence-backed violation records.
 
 \section{Literature Review}
 \label{section:literature-review}
 
-<TIP: Review academic papers or technical reports
-that are relevant to your project.
-For each source, briefly summarize its key findings and
-then explain how it informs your own design or implementation decisions.
-The goal is not just to describe what others have done,
-but to build a justification for your own technical choices.
-For example, if you chose a particular algorithm or architecture,
-cite the work that supports that decision. />
+The development of HelmTrack is based on research and technological advancements in computer vision, object detection, and automatic license plate recognition. This section reviews key studies and existing technologies that contribute to our project, allowing us to integrate the most effective techniques while addressing the limitations found in previous work.
+
+\subsection{Automatic Detection of Motorcyclists Without Helmet}
+\begin{subsecbody}
+Silva et al. \cite{paper:helmet-detection} proposed an automated system for detecting motorcycle riders who are not wearing a helmet using computer vision techniques. Their system analyzed traffic camera footage by first locating motorcycles in each frame and then examining the rider's head region to classify whether a helmet was present. The study demonstrated that image-based classification could reliably identify helmet violations under real traffic conditions. However, the system was limited to detection only. It produced no mechanism to identify the offending vehicle, contained no license plate recognition stage, and generated no structured violation records for use by law enforcement.
+\end{subsecbody}
+
+\subsection{Automatic License Plate Recognition System Based on Color Image Processing}
+\begin{subsecbody}
+Shi et al. \cite{paper:alpr} presented an automatic license plate recognition (ALPR) system that uses color image processing to locate and extract license plates from vehicle photographs. Their approach exploited the distinct color characteristics of license plates to segment the plate region from the surrounding image, followed by character segmentation and optical character recognition (OCR) to read the plate number. The study showed that color-based localization significantly reduces the search area for plate detection and improves recognition accuracy compared to methods that rely solely on edge detection or morphological operations.
+\end{subsecbody}
+
+\subsection{AI-Based Helmet Violation Detection for Traffic Management System}
+\begin{subsecbody}
+Said et al. \cite{paper:ai-helmet} proposed a fully AI-driven helmet violation detection system targeting traffic management applications. Their system employed a deep learning model to detect motorcycles and classify helmet compliance from camera footage, and evaluated the approach across multiple real-world traffic datasets. The study reported strong detection performance and highlighted the feasibility of deploying such systems as part of a broader smart traffic management infrastructure. Like earlier helmet detection work, however, the proposed system stops at the classification stage and does not integrate license plate recognition or automated violation logging.
+\end{subsecbody}
