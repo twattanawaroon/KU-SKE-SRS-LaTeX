@@ -4,6 +4,45 @@
 \section{Competitor Analysis}
 \label{section:competitor-analysis}
 
+\definecolor{tableheader}{RGB}{45,55,72}
+\definecolor{tablerowA}{RGB}{255,255,255}
+\definecolor{tablerowB}{RGB}{245,246,248}
+\definecolor{helmcolor}{RGB}{235,240,250}
+
+\setlength{\extrarowheight}{6pt}
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|p{4.6cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+
+\rowcolor{tableheader}
+\textcolor{white}{\textbf{Feature}} &
+\textcolor{white}{\textbf{Manual CCTV}} &
+\textcolor{white}{\textbf{Checkpoints}} &
+\textcolor{white}{\textbf{HelmTrack}} \\
+\hline
+\rowcolor{tablerowA}
+\textbf{Automation Level} & Low & Low & \cellcolor{helmcolor}High \\
+\hline
+\rowcolor{tablerowB}
+\textbf{Real-Time Detection} & Yes & Limited & \cellcolor{helmcolor}Yes \\
+\hline
+\rowcolor{tablerowA}
+\textbf{Scalability} & Low & Low & \cellcolor{helmcolor}High \\
+\hline
+\rowcolor{tablerowB}
+\textbf{Evidence Logging} & Limited & Limited & \cellcolor{helmcolor}Structured \\
+\hline
+\rowcolor{tablerowA}
+\textbf{Manpower Required} & High & High & \cellcolor{helmcolor}Low \\
+\hline
+\rowcolor{tablerowB}
+\textbf{Decision Consistency} & Variable & Variable & \cellcolor{helmcolor}Consistent \\
+\hline
+\end{tabularx}
+\caption{Competitor Analysis}
+\end{table}
+\setlength{\extrarowheight}{0pt}
+
 \textbf{Manual CCTV Monitoring Systems} are the most widely deployed approach in many cities, including Thailand. Traffic officers review footage to identify violations, making this method labor-intensive, error-prone, and impossible to scale city-wide.
 
 \textbf{Standalone ANPR Systems} from vendors such as Genetec and Hikvision are mature commercial products designed for vehicle identification, including toll collection, parking, and stolen-vehicle detection. They do not perform helmet detection and are not designed for motorcycle-specific workflows.
