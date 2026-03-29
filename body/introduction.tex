@@ -4,80 +4,71 @@
 \section{Background}
 \label{section:background}
 
-<TIP: 
-A background chapter in a book serves the purpose of providing essential context, information, or history that is relevant
-to the overall understanding of the book's subject matter. This chapter typically appears early in the book and aims to set the
-stage for the reader by offering background details that are crucial for comprehending the main narrative.
-/>
+Road safety remains a major public health concern, especially in countries where motorcycles are the primary mode of transportation. Despite helmet laws being in place in many countries, compliance remains inconsistent, and traditional enforcement methods such as police checkpoints and manual CCTV review are limited in coverage, costly, and inefficient at scale.
+
+Advances in artificial intelligence, particularly in computer vision and deep learning, have opened new possibilities for automating traffic law enforcement. This project, HelmTrack, proposes an AI-powered system that combines real-time helmet violation detection with automatic license plate recognition, aiming to reduce the burden on enforcement officers and provide scalable, evidence-based traffic monitoring.
 
 \section{Problem Statement}
 \label{section:problem-statement}
 
-<TIP: 
-A problem statement refers to a clear central issue,
-challenge, or question that the project aims to address or explore. It is a
-declaration that highlights the specific problem the author intends to examine,
-discuss, or solve throughout the course of the project.
-/>
+Motorcycle accidents are among the leading causes of traffic fatalities in many countries, and not wearing a helmet significantly increases the risk of fatal head injuries. Current enforcement relies on physical checkpoints and manual CCTV review, both of which are limited in coverage, costly in manpower, and unable to operate at a city-wide scale. As a result, violators are rarely caught outside of manned checkpoints, weakening the deterrent effect of helmet laws. There is a clear need for an automated system that can continuously monitor traffic, detect violations in real time, and generate reliable evidence without constant human oversight.
 
 \section{Solution Overview}
 \label{section:solution-overview}
 
-<TIP: 
-A software solution overview provides a high-level and
-concise description of a software product or system. It serves as an
-introduction to the software, offering a glimpse into its key features,
-functionalities, and the problems it aims to address. This overview is often
-presented in documentation, marketing materials, or other communication
-channels to give stakeholders, potential users, or decision-makers a quick
-understanding of what the software does and why it is valuable.
-/>
+HelmTrack is an AI-based real-time monitoring system that automatically detects motorcycle helmet violations and identifies offending vehicles through license plate recognition. The system processes CCTV video using a multi-stage computer vision pipeline to assess helmet compliance and extract license plate information when a violation is found. Violation records, including visual evidence, timestamp, plate number, and confidence scores, are automatically logged for authority review. The system is designed to be compatible with existing CCTV infrastructure and requires no continuous human supervision.
 
 \subsection{Features}
 \label{subsection:features}
 
 \begin{enumerate}[leftmargin=80pt]
-    \item Feature Name: Short Description of Feature
-    \item Feature Name: Short Description of Feature
+    \item \textbf{Real-Time Object Detection}: Detects motorcycles, riders, helmets, and license plates from video streams using YOLOv8.
+    \item \textbf{Helmet Violation Detection}: Determines whether a rider is wearing a helmet in each video frame.
+    \item \textbf{Automatic License Plate Recognition}: Extracts the license plate number using OCR when a violation is detected.
+    \item \textbf{Violation Evidence Logging}: Stores each violation with a frame image, plate image, plate number, timestamp, and confidence score.
 \end{enumerate}
 
 \section{Target User}
 \label{section:target-user}
 
-<TIP: 
-The target user in a software project refers to the specific
-group or demographic of individuals for whom the software is designed and
-developed. Identifying the target user is a crucial step in the software
-development process as it helps the development team tailor the software to
-meet the needs, preferences, and requirements of that particular user group.
-Understanding the characteristics, behaviors, and expectations of the target
-users is essential for creating a user-friendly and effective software solution.
+HelmTrack is designed for traffic law enforcement professionals and does not require any expertise in AI or computer vision to operate.
 
-Here are some key aspects related to defining the target user in a software project:
+\textbf{Traffic Police Officers} are the primary users, responsible for reviewing and processing helmet violation records generated by the system. HelmTrack reduces its need for continuous manual monitoring by delivering automatically generated evidence-backed reports.
 
-Demographics: This includes factors such as age, gender,
-occupation, education level, and other demographic characteristics. Different
-age groups or professional backgrounds may have distinct preferences and
-requirements when it comes to software usability.
+\textbf{City and Municipal Authorities} use the system to gain data-driven insights on violation rates and high-risk locations to support road safety policy decisions.
 
-Skill Level: Consideration of the users' technical proficiency and
-familiarity with similar software or technology. The level of technical expertise
-can influence the complexity of the user interface, the need for tutorials or
-documentation, and other user support features.
-
-Industry or Domain: For software solutions designed for specific
-industries or domains, understanding the unique challenges, workflows, and
-terminology within that industry is crucial. Tailoring the software to meet
-industry-specific needs is often necessary.
-/>
+\textbf{Highway and Road Departments} benefit from the system's ability to monitor geographically dispersed roads where maintaining a permanent officer presence is impractical.
 
 \section{Terminology}
 \label{section:terminology}
 
-<TIP: 
-Terminology refers to the specific language, jargon, or
-specialized vocabulary used to describe concepts, ideas, or subjects within a
-particular field or domain. The use of terminology is often essential for clarity
-and precision, especially in books that cover technical, scientific, academic, or
-specialized topics.
-/>
+The following terms and definitions are used throughout this document.
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{0.26\textwidth}|X|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Term}} & \multicolumn{1}{c|}{\textbf{Definition}} \\
+\hline
+YOLOv8 & The object detection model used to detect motorcycles, riders, helmets, and license plates in real time. \\
+\hline
+OCR & Optical Character Recognition, a technology that extracts readable text from images, used to read license plate numbers. \\
+\hline
+EasyOCR & An open-source Python OCR library used for license plate text extraction. \\
+\hline
+CCTV & Closed-Circuit Television: the video surveillance system used as the primary input source for HelmTrack. \\
+\hline
+Bounding Box & A rectangular boundary drawn around a detected object indicates its location within a frame. \\
+\hline
+Confidence Score & A value indicating the model's certainty that a detected object belongs to a given class. \\
+\hline
+Spatial Association & Logic used to link detected objects based on proximity or bounding box overlap within a frame. \\
+\hline
+Helmet Violation & An event where a motorcycle rider is detected without a helmet. \\
+\hline
+Multi-Frame Tracking & A technique that analyzes consecutive frames to improve detection reliability and reduce false positives. \\
+\hline
+Fine-Tuning & Further training a pre-trained model on domain-specific data to improve performance. \\
+\hline
+\end{tabularx}
+\end{table}
